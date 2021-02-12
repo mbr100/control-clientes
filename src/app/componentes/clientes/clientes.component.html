@@ -1,0 +1,94 @@
+<!-- Botones  -->
+<section id="acrions" class="py-4 mb-4 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <a href="#" class="btn btn-primary btn-block" data-toggle="modal" data-target="#agregarClienteModal">
+                    <i class="fas fa-plus"></i> Agregar cliente
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Listado clientes  -->
+<section id="clientes">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Listado clientes</h4>
+                    </div>
+                    <table class="table table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Saldo</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let cli of clientes; let i=index">
+                            <td>{{i + 1}}</td>
+                            <td>{{cli.nombre}} {{cli.apellido}}</td>
+                            <td>{{cli.saldo | currency: 'EUR': '€'}}</td>
+                            <td>
+                                <a routerLink="/cliente/editar/{{cli.id}}" class="btn btn-secondary">
+                                    <i class="fas fa-angle-double-right"></i> Editar
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tarjetas laterales -->
+
+            <div class="col-mb-3">
+                <div class="card text-center bg-danger text-whith mb-3">
+                    <div class="card-body">
+                        <h3>Saldo Total</h3>
+                        <h4 class="display-4">
+                            {{getSaldoTotal() | currency: 'EUR':'€'}}
+                        </h4>
+                    </div>
+                </div>
+
+
+                <div class="col-mb-3">
+                    <div class="card text-center bg-success text-whith mb-3">
+                        <div class="card-body">
+                            <h3>Total Clientes</h3>
+                            <h4 class="display-4">
+                                <i class="fas fa-users"></i> {{clientes?.length}}
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fianl Tarjetas laterales -->
+        </div>
+    </div>
+</section>
+
+
+<!-- Agregar cliente modal -->
+<div class="modal fade" id="agregarClienteModal">
+    <div class="modal-dialog modl-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-info text-white">
+                <h5 class="modal-title">Agregar cliente</h5>
+                <button class="close" data-dismiss="modal"></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

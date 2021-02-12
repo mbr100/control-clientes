@@ -8,9 +8,9 @@ import {map} from 'rxjs/operators';
 export class ClienteServicio
 {
     clientesColeccion: AngularFirestoreCollection<Cliente>;
-    clienteDoc: AngularFirestoreDocument<Cliente>;
+    //clienteDoc: AngularFirestoreDocument<Cliente>;
     clientes: Observable<Cliente[]>;
-    cliente: Observable<Cliente>;
+    //cliente: Observable<Cliente>;
 
     constructor(private  db: AngularFirestore)
     {
@@ -23,10 +23,10 @@ export class ClienteServicio
         this.clientes = this.clientesColeccion.snapshotChanges().pipe(
             map( cambios => {
                 return cambios.map( accion => {
-                    const datos = accion.payload.doc.data as Cliente;
+                    const datos = accion.payload.doc.data() as Cliente;
                     datos.id = accion.payload.doc.id;
                     return datos;
-                })
+                });
             })
         );
         return this.clientes;
